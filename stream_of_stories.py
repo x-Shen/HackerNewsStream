@@ -4,20 +4,26 @@ Created on Sep 20, 2015
 @author: xinshen
 '''
 import tool_box
+import threading
 
-# Generate and Present Ten Stories
 
-def generate_ten_stories():
-    stories = tool_box.get_top_n_stories_id(tool_box.base_url, 10, tool_box.context)
-    story_list = []
-    for i in range(10):
-        story_list.append(tool_box.get_story_by_id(stories[i]))
-    return story_list
+class time_manager(threading.Thread):
+    def __init__(self,event=None):
+        threading.Thread.__init__(self)
+        self.stopped = event
         
+    def run(self):
+        while not self.stopped.wait(10):
+            print("Hacker News Top Stories")
+            new_stories =tool_box.generate_ten_stories(tool_box.base_url,tool_box.context,'topstories')
+            tool_box.present_story_list(new_stories)
+            
 
-def present_ten_stories():
-    pass
+stopFlag = threading.Event()            
+thread = time_manager(stopFlag)
+thread.start()
+# this will stop the timer
+#stopFlag.set()
+        
+    
 
-# Ten New Stories and Ten Top Stories
-
-# Get comments

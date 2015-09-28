@@ -52,9 +52,11 @@ def generate_ten_stories(base,context,type_of):
 def present_story_list(stories):
     for story in stories:
         print(present_story(json_to_dict(story)))
-
-top_stories = generate_ten_stories(base_url,context,'topstories')
-new_stories =  generate_ten_stories(base_url,context,'newstories')
+        
+if __name__ =='__main__':
+    top_stories = generate_ten_stories(base_url,context,'topstories')
+    new_stories =  generate_ten_stories(base_url,context,'newstories')
+    present_story_list(new_stories)
 
 
     
