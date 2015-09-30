@@ -8,6 +8,8 @@ import urllib.request
 import ssl
 import json
 
+count = 1
+
 base_url = 'https://hacker-news.firebaseio.com/v0/'
 context = ssl._create_unverified_context()
 
@@ -17,7 +19,10 @@ def get_json(base,item,context):
     return html
 
 def convert_to_str(b_str):
-    return b_str.decode("utf-8")
+    try:
+        return b_str.decode("utf-8")
+    except:
+        return "Error occured."
 
 def get_top_n_stories_id(base,n,type_of,context):
     ids = get_json(base,type_of,context)
@@ -36,7 +41,10 @@ def json_to_dict(json_file):
     return d
 
 def present_story(d):
-    s = d['title']+'\t'+str(d['score'])+'\n'+d['url']+'\n'
+    try:
+        s = d['title']+'\t'+str(d['score'])+'\n'+d['url']+'\n'
+    except:
+        return 'Error occurred.'
     return s
 
 #j = get_story_by_id(base_url,l[0],context)
@@ -50,8 +58,17 @@ def generate_ten_stories(base,context,type_of):
     return story_list
 
 def present_story_list(stories):
+    global count
+    file = open(("StoryStream"+str(count)),'w')
     for story in stories:
         print(present_story(json_to_dict(story)))
+        s = present_story(json_to_dict(story))
+            
+        file.write(s.replace(u'\u2019',"'").replace(u"\u2018", "'").replace(u"\u2013",'-'))
+        
+    file.close()
+    count = count+1
+
         
 if __name__ =='__main__':
     top_stories = generate_ten_stories(base_url,context,'topstories')
