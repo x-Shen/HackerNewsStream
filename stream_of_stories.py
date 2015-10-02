@@ -18,12 +18,12 @@ class time_manager(threading.Thread):
             new_stories =tool_box.generate_ten_stories(tool_box.base_url,tool_box.context,'topstories')
             tool_box.present_story_list(new_stories)
             
-
-stopFlag = threading.Event()            
-thread = time_manager(stopFlag)
-thread.start()
-# this will stop the timer
-#stopFlag.set()
+if __name__=='__main__':
+    stopFlag = threading.Event()            
+    thread = time_manager(stopFlag)
+    thread.start()
+    # this will stop the timer
+    #stopFlag.set()
         
     
 
