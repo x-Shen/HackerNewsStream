@@ -18,9 +18,12 @@ def build_content(passages):
 <head>
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="content-type">
-  <title>Hello</title>
+ <meta name="viewpoint" conent = "width=device-width">
+  <title>Hacker News Stream</title>
+  <link href = /Users/xinshen/Documents/workspace/HackerNewsStream/normalize.css> 
 </head>
-<body>'''
+<body>
+<p>Hacker News Stream</p>'''
     p2 ='''
 </body>
 </html>

@@ -63,7 +63,7 @@ def present_story_list(stories):
     #file = open(("StoryStream"+str(count)),'w')
     for story in stories:
         #print(present_story(json_to_dict(story)))
-        result+= present_story(json_to_dict(story))+'\n'
+        result+= '<p>'+present_story(json_to_dict(story))+'</p>'
             
     #    file.write(s.replace(u'\u2019',"'").replace(u"\u2018", "'").replace(u"\u2013",'-'))
         
