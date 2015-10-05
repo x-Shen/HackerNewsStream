@@ -5,6 +5,7 @@ Created on Sep 20, 2015
 '''
 import tool_box
 import stream_of_stories
+import codecs
 
 NewProcess = stream_of_stories.time_manager(stream_of_stories.stopFlag)
 NewProcess.start()
@@ -13,17 +14,17 @@ def get_texts(time_manager):
     return time_manager.texts
 
 def build_content(passages):
-    p1 = '''<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+    p1 = '''
 <html>
 <head>
-  <meta content="text/html; charset=ISO-8859-1"
+  <meta content="text/html; charset=UTF-8"
  http-equiv="content-type">
  <meta name="viewpoint" conent = "width=device-width">
   <title>Hacker News Stream</title>
-  <link href = /Users/xinshen/Documents/workspace/HackerNewsStream/normalize.css> 
 </head>
 <body>
-<p>Hacker News Stream</p>'''
+<p>Hacker News Stream</p>
+'''
     p2 ='''
 </body>
 </html>
@@ -42,9 +43,9 @@ def main():
 
 def strToFile(text, filename):
     """Write a file with the given name and the given text."""
-    output = open(filename,"w")
-    output.write(text.replace(u'\u2019',"'").replace(u"\u2018", "'").replace(u"\u2013",'-'))
-    output.close()
+    with codecs.open(filename,'w',encoding='utf8') as output:
+        output.write(text)
+        output.close()
 
 def browseLocal(webpageText, filename='tempBrowseLocal.html'):
     import webbrowser, os.path

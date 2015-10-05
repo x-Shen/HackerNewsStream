@@ -12,7 +12,6 @@ class time_manager(threading.Thread):
         threading.Thread.__init__(self)
         self.stopped = event
         self.texts= ''
-        
     def run(self):
         while not self.stopped.wait(10):
             print("Hacker News Top Stories")
