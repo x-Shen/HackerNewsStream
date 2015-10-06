@@ -14,25 +14,21 @@ def get_texts(time_manager):
     return time_manager.texts
 
 def build_content(passages):
-    p1 = '''
-<html>
-<head>
-  <meta content="text/html; charset=UTF-8"
- http-equiv="content-type">
- <meta name="viewpoint" conent = "width=device-width">
-  <title>Hacker News Stream</title>
-</head>
-<body>
-<p>Hacker News Stream</p>
-'''
-    p2 ='''
-</body>
-</html>
-'''
-    if passages!='':
-        return p1+passages+p2
+    template = open("template.html",'r')
+    template = template.read()
+    result = ''
+    if passages!=[]:
+        for i in range(10):
+            box =template.find('boxen')
+            result += template[:box]+passages[i]
+            template =template[box+5:]
     else:
-        return p1+tool_box.present_story_list(tool_box.top_stories)+p2
+        content = tool_box.present_story_list(tool_box.top_stories)
+        for i in range(10):
+            box = template.find('boxen')
+            result += template[:box]+content[i]
+            template = template[box+5:]
+        return result
 
 #print(build_content(get_texts(NewProcess)))
     

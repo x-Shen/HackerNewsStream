@@ -58,23 +58,15 @@ def generate_ten_stories(base,context,type_of):
     return story_list
 
 def present_story_list(stories):
-    result = ''
-    #global count
-    #file = open(("StoryStream"+str(count)),'w')
+    result = []
     for story in stories:
-        #print(present_story(json_to_dict(story)))
-        result+= '<p>'+present_story(json_to_dict(story))+'</p>'
-            
-    #    file.write(s.replace(u'\u2019',"'").replace(u"\u2018", "'").replace(u"\u2013",'-'))
-        
-    #file.close()
-    #count = count+1
+        result.append(present_story(json_to_dict(story)))
     return result
 
 top_stories = generate_ten_stories(base_url,context,'topstories')
 new_stories =  generate_ten_stories(base_url,context,'newstories')        
 if __name__ =='__main__':
-    present_story_list(new_stories)
+    print(present_story_list(top_stories))
 
 
     
